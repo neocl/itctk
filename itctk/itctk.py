@@ -177,6 +177,15 @@ class Sentence:
         '''
         return " ".join([ x.text for x in self.words ])
 
+    def pos(self):
+        ''' Return sentence structure (a sequence of POS as a string)
+        E.g.
+        pos_struct of the sentence Kera/NN untuk/SC amankan/VB pesta olahraga/NN
+        is 
+        'NN SC VB NN'
+        '''
+        return ' '.join([ x.pos for x in self.words ])
+
 class Word:
     ''' Information of a Word
     '''
