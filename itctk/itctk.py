@@ -65,8 +65,11 @@ ITC_DATA_FILE = 'data/itcdata/Indonesian_Manually_Tagged_Corpus.tsv'
 class Document:
     ''' A document contains many sentences
     '''
-    def __init__(self):
-        self.sentences = []
+    def __init__(self, sentences = None):
+        if sentences is None:
+            self.sentences = []
+        else:
+            self.sentences = sentences
         self.words     = []
         self.lexicon   = defaultdict(set)
         self.pos       = defaultdict(set)
@@ -80,6 +83,9 @@ class Document:
     def __iter__(self):
         for sent in self.sentences:
             yield sent
+
+    def __repr__(self):
+        return str(self.sentences)
 
     def new_sentence(self):
         ''' Create a new sentence
@@ -106,7 +112,21 @@ class Document:
         '''
         return list(sorted(self.pos.keys()))
 
+    def text(self):
+        ''' Return a text-only version of this doc
+        '''
+        return '\n'.join([ x.text() for x in self ])
+
     def find(self, text, case_sensitive=True):
+        words = self.find_word(text, case_sensitive)
+        sents = set([ x.sentence for x in words ])
+        subdoc = Document(list(sents))
+        for sent in sents:
+            for word in sent:
+                subdoc.add_word(word)
+        return subdoc
+
+    def find_word(self, text, case_sensitive=True):
         ''' Find a word by regular expression
         '''
         pattern = re.compile(text)

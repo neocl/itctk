@@ -117,7 +117,7 @@ class TestWord(unittest.TestCase):
         def test_word_search(self):
 		'''Test searching by regular expression'''
                 doc = itc('data/test.tsv')
-		found = doc.find('mem.+')
+		found = doc.find_word('mem.+')
 		self.assertTrue(len(found) > 0)
 		self.assertEqual(7, len(found))
 
