@@ -156,6 +156,9 @@ class Word:
     def __hash__(self):
         return hash((self.text, self.pos))
 
+    def __lt__(self, other):
+        return (self.text, self.pos) < (other.text, other.pos)
+
 #----------------------------------------------------------------------------
 # FUNCTIONS
 #----------------------------------------------------------------------------
@@ -172,6 +175,8 @@ def parse_data(datafile_path):
             words_raw = sentence_raw.split('\n')
             sentence  = doc.new_sentence()
             for word_raw in words_raw:
+                if '\t' not in word_raw:
+                    continue
                 text, pos = word_raw.split('\t')  # Word features are seperated by tabs \t
                 word = sentence.new_word(text, pos)
 
@@ -179,8 +184,8 @@ def parse_data(datafile_path):
 
 ########################################################################
 
-def itc():
-    return parse_data(ITC_DATA_FILE)
+def itc(file_name=ITC_DATA_FILE):
+    return parse_data(file_name)
 
 def dev_mode():
     print("Find negative words")
