@@ -37,6 +37,7 @@ References:
 #THE SOFTWARE.
 
 __author__ = "Le Tuan Anh <tuananh.ke@gmail.com>"
+__contributors__ = [ "David Moeljadi <davidmoeljadi@gmail.com>" ]
 __copyright__ = "Copyright 2016, itctk"
 __credits__ = [ "Le Tuan Anh" ]
 __license__ = "MIT"
@@ -66,6 +67,9 @@ ITC_DATA_FILE = 'data/itcdata/Indonesian_Manually_Tagged_Corpus.tsv'
 TagInfo = namedtuple('TagInfo', ['pos', 'desc', 'ex'])
 
 POS_TAGSET = {}
+
+# [2016-02-25 DM] information extracted from http://bahasa.cs.ui.ac.id/postag/downloads/Tagset.pdf
+
 POS_TAGSET["CC"] = TagInfo("CC", """Coordinating conjunction, also called coordinator.
 Coordinating conjunction links two or more syntactically equivalent parts of a sentence. Coordinating conjunction can link independent clauses, phrases, or words.""", "dan, tetapi, atau")
 
