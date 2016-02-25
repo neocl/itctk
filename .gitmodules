@@ -1,0 +1,3 @@
+[submodule "data/itcdata"]
+	path = data/itcdata
+	url = https://github.com/neocl/idn-tagged-corpus
