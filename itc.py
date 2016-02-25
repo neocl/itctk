@@ -48,10 +48,12 @@ __status__ = "Prototype"
 ########################################################################
 
 from itctk import *
+import re
+from collections import defaultdict as dd
+
+#####
 
 print("Reading Indonesian Tagged Corpus ...")
-
 doc = itc()
-
 print("ITC document is now ready to be used in var `doc`")
 
