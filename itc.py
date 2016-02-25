@@ -68,7 +68,7 @@ def dump(a_list):
 def pro_lookup(cond):
     sents = [ x for x in doc if cond(x) ]
     dump(sents)
-    return sents
+    return Document(sents)
 
 def lookup(pattern):
     return pro_lookup(lambda x: pattern in x.pos())

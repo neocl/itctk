@@ -66,13 +66,19 @@ class Document:
     ''' A document contains many sentences
     '''
     def __init__(self, sentences = None):
+        self.words     = []
+        self.lexicon   = defaultdict(set)
+        self.pos       = defaultdict(set)
+
         if sentences is None:
             self.sentences = []
         else:
             self.sentences = sentences
-        self.words     = []
-        self.lexicon   = defaultdict(set)
-        self.pos       = defaultdict(set)
+            # auto add all words in provided sentences into this doc
+            for sent in sentences:
+                for word in sent:
+                    self.add_word(word)
+
 
     def __len__(self):
         return len(self.sentences)
@@ -121,9 +127,6 @@ class Document:
         words = self.find_word(text, case_sensitive)
         sents = set([ x.sentence for x in words ])
         subdoc = Document(list(sents))
-        for sent in sents:
-            for word in sent:
-                subdoc.add_word(word)
         return subdoc
 
     def filter(self, pattern_text):
