@@ -70,6 +70,16 @@ class Document:
         self.lexicon   = defaultdict(set)
         self.pos       = defaultdict(set)
 
+    def __len__(self):
+        return len(self.sentences)
+
+    def __getitem__(self, index):
+        return self.sentences[index]
+
+    def __iter__(self):
+        for sent in self.sentences:
+            yield sent
+
     def new_sentence(self):
         sent = Sentence(self)
         self.sentences.append(sent)
@@ -101,6 +111,16 @@ class Sentence:
 
     def __repr__(self):
         return str(self)
+
+    def __getitem__(self, index):
+        return self.words[index]
+
+    def __len__(self):
+        return len(self.words)
+
+    def __iter__(self):
+        for w in self.words:
+            yield w
 
     def new_word(self, text, pos):
         w = Word(text, pos, self)
