@@ -63,7 +63,7 @@ print("ITC document is now ready to be used in var `doc`")
 
 def dump(a_list):
     for idx,item in enumerate(a_list):
-        print("%s. %s" % (idx, item))
+        print("%s. %s" % (idx + 1, item))
 
 def pro_lookup(cond):
     sents = [ x for x in doc if cond(x) ]
