@@ -82,19 +82,28 @@ class Document:
             yield sent
 
     def new_sentence(self):
+        ''' Create a new sentence
+        '''
         sent = Sentence(self)
         self.sentences.append(sent)
         return sent
 
     def add_word(self, word):
+        ''' Add a word into sentence. Normally you should NOT call this method.
+        '''
         self.words.append(word)
         self.lexicon[word.text.lower()].add(word.pos)
         self.pos[word.pos].add(word.text.lower())
 
     def word_list(self):
+        ''' Return a list of distinct word (as string, not word object) in ITC
+        '''
         return list(sorted(self.lexicon.keys()))
 
     def pos_list(self):
+        ''' Return a list of all POS that are used in the corpus
+        Currently: ['CC', 'CD', 'DT', 'FW', 'IN', 'JJ', 'MD', 'NEG', 'NN', 'NND', 'NNP', 'OD', 'PR', 'PRP', 'RB', 'RP', 'SC', 'SYM', 'UH', 'VB', 'WH', 'X', 'Z']
+        '''
         return list(sorted(self.pos.keys()))
 
     def find(self, text, case_sensitive=True):
@@ -132,6 +141,8 @@ class Sentence:
             yield w
 
     def new_word(self, text, pos):
+        ''' Add a new word and register this sentence as its container
+        '''
         w = Word(text, pos, self)
         self.words.append(w)
         if self.doc:
@@ -139,6 +150,11 @@ class Sentence:
         return w
     
     def text(self):
+        ''' Return text-only version of this sentence
+        E.g.:
+            str(a_sentence) will provide 'Kera/NN untuk/SC amankan/VB pesta olahraga/NN'
+            but a_sentence.text() will provide 'Kera untuk amankan pesta olahraga'
+        '''
         return " ".join([ x.text for x in self.words ])
 
 class Word:
