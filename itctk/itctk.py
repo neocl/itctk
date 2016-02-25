@@ -192,7 +192,7 @@ POS_TAGSET["X"] = TagInfo("X", """Unknown.
 A word or part of a sentence which its category is unknown or uncertain is labeled X.
 Typo is also labeled X.""", "statemen")
 
-POS_TAGSET["Z"] = TagInfo("Z", """Punctuation.""", ""...", ?, .")
+POS_TAGSET["Z"] = TagInfo("Z", """Punctuation.""", '"...", ?, .')
 
 #----------------------------------------------------------------------------
 # DATA STRUCTURES
