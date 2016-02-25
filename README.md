@@ -38,6 +38,14 @@ for sent in doc:        # for each sentence in doc
     print(word)
 ```
 
+Look for interesting constructions:
+---
+```
+sents = [ x for x in doc if 'NEG PRP VB' in x.pos() ]
+for i,s in enumerate(sents):
+  print("%s. %s" % (i,s))
+```
+
 Project structure:
 ---
 
