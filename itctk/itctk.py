@@ -248,6 +248,16 @@ def parse_data(datafile_path):
 def itc(file_name=ITC_DATA_FILE):
     return parse_data(file_name)
 
+def export_itc():
+    print("Reading ITC ...")
+    doc = itc()
+    output_loc = 'data/itc.txt'
+
+    print("Exporting ITC ...")
+    with open(output_loc, 'w') as itc_output:
+        for sent in doc:
+            itc_output.write('%s\n' % (sent,))
+    print("ITC has been exported to %s" % (output_loc,))
 def dev_mode():
     print("Find negative words")
     doc = all_ict()
@@ -271,6 +281,7 @@ def main():
         
         # Positional argument(s)
         parser.add_argument('-d', '--dev_mode', help='Quick dev method', action='store_true')
+        parser.add_argument('-x', '--export', help='Export ITC to NTLK format', action='store_true')
 
         # Optional argument(s)
         group = parser.add_mutually_exclusive_group()
@@ -287,6 +298,8 @@ def main():
                 # Now do something ...
                 if args.dev_mode:
                         dev_mode()
+                if args.export:
+                    export_itc()
                 else:
                         parser.print_help()
         pass
