@@ -50,6 +50,7 @@ __status__ = "Prototype"
 import sys
 import os
 import argparse
+import re
 from collections import defaultdict
 
 #-----------------------------------------------------------------------
@@ -96,6 +97,14 @@ class Document:
     def pos_list(self):
         return list(sorted(self.pos.keys()))
 
+    def find(self, text, case_sensitive=True):
+        ''' Find a word by regular expression
+        '''
+        pattern = re.compile(text)
+        if case_sensitive:
+            return [ w for w in self.words if pattern.match(w.text) ]
+        else:
+            return [ w for w in self.words if pattern.match(w.text.lower()) ]
 
 class Sentence:
     ''' Sentence structure
