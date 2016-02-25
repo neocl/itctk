@@ -70,5 +70,6 @@ def pro_lookup(cond):
     dump(sents)
     return Document(sents)
 
-def lookup(pattern):
-    return pro_lookup(lambda x: pattern in x.pos())
+def lookup(pattern_text):
+    pattern = re.compile(pattern_text)
+    return pro_lookup(lambda x: pattern.match(x.pos()))
