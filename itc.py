@@ -47,7 +47,11 @@ __status__ = "Prototype"
 
 ########################################################################
 
-from .itctk import *
+from itctk import *
 
-__all__ = [ 'ITC_DATA_FILE', 'itc', 'parse_data', 'Document', 'Sentence', 'Word' ]
+print("Reading Indonesian Tagged Corpus ...")
+
+doc = itc()
+
+print("ITC document is now ready to be used in var `doc`")
 

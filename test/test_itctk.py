@@ -55,7 +55,8 @@ import os
 import argparse
 import unittest
 from itctk import itc
-from itctk.itctk import Document, Sentence, Word
+from itctk import Document, Sentence, Word
+from itctk import ITC_DATA_FILE, parse_data   # Expose low level functions
 
 ########################################################################
 
