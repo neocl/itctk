@@ -54,7 +54,8 @@ import sys
 import os
 import argparse
 import unittest
-from itctk import all_itc
+from itctk import itc
+from itctk.itctk import Document, Sentence, Word
 
 ########################################################################
 
@@ -62,9 +63,37 @@ class TestICTTK(unittest.TestCase):
 
 	def test_read_doc(self):
 		print("Testing read all ITC content")
-		doc = all_itc()
+		doc = itc()
 		self.assertIsNotNone(doc)
 		self.assertEqual(len(doc.sentences), 10030)
+
+class TestWord(unittest.TestCase):
+	def test_word_comparison(self):
+		w = Word('test', 'NN')
+		w2 = Word('test', 'NN')
+		self.assertTrue(w == w2)
+
+	def test_word_in_set(self):
+		set1 = set()
+		set2 = set()
+		w1 = Word(None, None)
+		w2 = Word(None, None)
+		w3 = Word('test', 'NN')
+		w4 = Word('test', 'VB')
+
+		set1.add(w1)
+		set1.add(w2)
+		set1.add(w3)
+		
+		# w1 and w2 are the same
+		self.assertEqual(2, len(set1))
+
+		set2.add(w1)
+		set2.add(w2)
+		set2.add(w3)
+		set2.add(w4)
+
+		self.assertEqual(3,len(set2))
 
 ########################################################################
 
