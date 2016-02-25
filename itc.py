@@ -57,3 +57,18 @@ print("Reading Indonesian Tagged Corpus ...")
 doc = itc()
 print("ITC document is now ready to be used in var `doc`")
 
+#####
+
+# Some useful methods
+
+def dump(a_list):
+    for idx,item in enumerate(a_list):
+        print("%s. %s" % (idx, item))
+
+def pro_lookup(cond):
+    sents = [ x for x in doc if cond(x) ]
+    dump(sents)
+    return sents
+
+def lookup(pattern):
+    return pro_lookup(lambda x: pattern in x.pos())

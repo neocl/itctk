@@ -126,6 +126,10 @@ class Document:
                 subdoc.add_word(word)
         return subdoc
 
+    def filter(self, pattern_text):
+        pattern = re.compile(pattern_text)
+        
+
     def find_word(self, text, case_sensitive=True):
         ''' Find a word by regular expression
         '''
