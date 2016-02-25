@@ -68,6 +68,7 @@ class Document:
         self.sentences = []
         self.words     = []
         self.lexicon   = defaultdict(set)
+        self.pos       = defaultdict(set)
 
     def new_sentence(self):
         sent = Sentence(self)
@@ -76,10 +77,15 @@ class Document:
 
     def add_word(self, word):
         self.words.append(word)
-        self.lexicon[word.text].add(word.pos)
+        self.lexicon[word.text.lower()].add(word.pos)
+        self.pos[word.pos].add(word.text.lower())
 
     def word_list(self):
         return list(sorted(self.lexicon.keys()))
+
+    def pos_list(self):
+        return list(sorted(self.pos.keys()))
+
 
 class Sentence:
     ''' Sentence structure
