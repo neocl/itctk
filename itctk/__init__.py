@@ -49,5 +49,5 @@ __status__ = "Prototype"
 
 from .itctk import *
 
-__all__ = [ 'ITC_DATA_FILE', 'itc', 'parse_data', 'Document', 'Sentence', 'Word' ]
+__all__ = [ 'ITC_DATA_FILE', 'itc', 'parse_data', 'Document', 'Sentence', 'Word', 'POS_TAGSET' ]
 
