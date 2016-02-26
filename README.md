@@ -48,6 +48,18 @@ Look for interesting constructions:
 lookup("NEG PRP VB")
 ```
 
+Look for parts-of-speech constructions in a sentence:
+---
+```
+a_sentence.pos()
+```
+
+Print a sentence as a text without part-of-speech information:
+---
+```
+a_sentence.text()
+```
+
 Look for a dictionary of unique words and part(s)-of-speech:
 ---
 ```
