@@ -100,6 +100,10 @@ e.g. look for words "penge...kan" such as "pengecekan"
 ```
 doc.find_word("^penge.+kan$")
 ```
+to show line by line
+```
+dump(doc.find_word("^penge.+kan$"))
+```
 
 Print the whole text:
 ---
