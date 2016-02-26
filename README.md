@@ -83,6 +83,24 @@ Look for a list of words:
 doc.word_list()
 ```
 
+Look for words in sentences with regular expression:
+---
+e.g. look for words "penge...kan" such as "pengecekan"
+```
+doc.find("^penge.+kan$")
+```
+to show sentence by sentence
+```
+dump(doc.find("^penge.+kan$"))
+```
+
+Look for words without sentences with regular expression:
+---
+e.g. look for words "penge...kan" such as "pengecekan"
+```
+doc.find_word("^penge.+kan$")
+```
+
 Print the whole text:
 ---
 ```
