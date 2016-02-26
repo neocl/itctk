@@ -51,15 +51,9 @@ from itctk import *
 import re
 from collections import defaultdict as dd
 
-#####
-
-print("Reading Indonesian Tagged Corpus ...")
-doc = itc()
-print("ITC document is now ready to be used in var `doc`")
-
-#####
-
+########################################################################
 # Some useful methods
+########################################################################
 
 def dump(a_list):
     for idx,item in enumerate(a_list):
@@ -73,3 +67,25 @@ def pro_lookup(cond):
 def lookup(pattern_text):
     pattern = re.compile(pattern_text)
     return pro_lookup(lambda x: pattern.match(x.pos()))
+
+def stats(doc):
+    print("Sentence count: {:>12,}".format(len(doc)))
+    print("Token count   : {:>12,}".format(len(doc.words)))
+    print("Lexicon size  : {:>12,}".format(len(doc.word_list())))
+    print("POS tagset    : {}".format(doc.pos_list()))
+    print()
+########################################################################
+# Load ITC into doc by default
+########################################################################
+
+doc = None # ITC will be loaded into this variable
+
+def main():
+    print("Reading Indonesian Tagged Corpus ...")
+    global doc
+    doc = itc()
+    print("ITC document is now ready to be used in var `doc`")
+    stats(doc)
+
+if __name__ == '__main__':
+    main()
