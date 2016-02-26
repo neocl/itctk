@@ -10,6 +10,10 @@ bash itc.sh
 ```
 or 
 ```
+./itc.sh
+```
+or 
+```
 export PYTHONSTARTUP=itc.py
 python3
 ```
@@ -41,9 +45,48 @@ for sent in doc:        # for each sentence in doc
 Look for interesting constructions:
 ---
 ```
-sents = [ x for x in doc if 'NEG PRP VB' in x.pos() ]
-for i,s in enumerate(sents):
-  print("%s. %s" % (i,s))
+lookup("NEG PRP VB")
+```
+
+Look for a dictionary of unique words and part(s)-of-speech:
+---
+```
+doc.lexicon
+```
+
+Look for a dictionary of parts-of-speech and unique word(s):
+---
+```
+doc.pos
+```
+
+Look for a dictionary of part-of-speech tagsets, descriptions and examples:
+---
+```
+POS_TAGSET
+```
+e.g. look for the description and examples of part-of-speech "CC":
+```
+POS_TAGSET["CC"].desc
+POS_TAGSET["CC"].ex
+```
+
+Look for a list of parts-of-speech:
+---
+```
+doc.pos_list()
+```
+
+Look for a list of words:
+---
+```
+doc.word_list()
+```
+
+Print the whole text:
+---
+```
+print(doc.text())
 ```
 
 Project structure:
@@ -65,4 +108,3 @@ Project structure:
 |   |-- ....
 |- setup.py
 ```
-
