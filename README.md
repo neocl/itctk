@@ -47,6 +47,18 @@ Look for interesting constructions:
 ```
 lookup("NEG PRP VB")
 ```
+regular expressions can be used,
+e.g. look for constructions with 12 NNP
+and show the results line by line
+```
+dump(lookup("(NNP ){12}"))
+```
+e.g. look for constructions which has any POS
+preceded by NEG and followed by VB such as
+NEG PRP VB, NEG JJ VB etc.
+```
+lookup("NEG\s\w+\sVB")
+```
 
 Look for parts-of-speech constructions in a sentence:
 ---
