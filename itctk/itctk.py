@@ -18,28 +18,28 @@ References:
 
 # Copyright (c) 2016, Le Tuan Anh <tuananh.ke@gmail.com>
 #
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 #
-#The above copyright notice and this permission notice shall be included in
-#all copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
 #
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-#THE SOFTWARE.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 
 __author__ = "Le Tuan Anh <tuananh.ke@gmail.com>"
-__contributors__ = [ "David Moeljadi <davidmoeljadi@gmail.com>" ]
+__contributors__ = ["David Moeljadi <davidmoeljadi@gmail.com>"]
 __copyright__ = "Copyright 2016, itctk"
-__credits__ = [ "Le Tuan Anh" ]
+__credits__ = ["Le Tuan Anh"]
 __license__ = "MIT"
 __version__ = "0.1"
 __maintainer__ = "Le Tuan Anh"
@@ -55,14 +55,14 @@ import re
 from collections import defaultdict
 from collections import namedtuple
 
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 # CONFIGURATION
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 ITC_DATA_FILE = 'data/itcdata/Indonesian_Manually_Tagged_Corpus.tsv'
 
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 # POS TAGSET
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 TagInfo = namedtuple('TagInfo', ['pos', 'desc', 'ex'])
 
@@ -71,7 +71,8 @@ POS_TAGSET = {}
 # [2016-02-25 DM] information extracted from http://bahasa.cs.ui.ac.id/postag/downloads/Tagset.pdf
 
 POS_TAGSET["CC"] = TagInfo("CC", """Coordinating conjunction, also called coordinator.
-Coordinating conjunction links two or more syntactically equivalent parts of a sentence. Coordinating conjunction can link independent clauses, phrases, or words.""", "dan, tetapi, atau")
+Coordinating conjunction links two or more syntactically equivalent parts of a sentence. Coordinating conjunction can link independent clauses, phrases, or words.""",
+                           "dan, tetapi, atau")
 
 POS_TAGSET["CD"] = TagInfo("CD", """Cardinal number.
 Cardinal numbers, i.e. numerals which are the answers to the question “How much?” or “How many?”, include:
@@ -90,14 +91,17 @@ POS_TAGSET["OD"] = TagInfo("OD", """Ordinal number.
 Ordinal number indicates an ordered position in a series, e.g. ketiga ‘third’.""", "ketiga, ke-4, pertama")
 
 POS_TAGSET["DT"] = TagInfo("DT", """Determiner / article.
-Article is a determiner, i.e. grammatical unit which limits the potential referent of a noun phrase, whose basic role is to mark noun phrases as either definite or indefinite.""", "para, sang, si")
+Article is a determiner, i.e. grammatical unit which limits the potential referent of a noun phrase, whose basic role is to mark noun phrases as either definite or indefinite.""",
+                           "para, sang, si")
 
 POS_TAGSET["FW"] = TagInfo("FW", """Foreign word.
 Foreign word is a word which comes from foreign language and basically is not yet included in Indonesian dictionary.
-If a foreign word is part of a proper noun or name, that word will be labeled NNP.""", "climate change, terms and conditions")
+If a foreign word is part of a proper noun or name, that word will be labeled NNP.""",
+                           "climate change, terms and conditions")
 
 POS_TAGSET["IN"] = TagInfo("IN", """Preposition.
-A preposition links word or phrase and constituent in front of that preposition and results prepositional phrase.""", "dalam, dengan, di, ke, oleh, pada, untuk")
+A preposition links word or phrase and constituent in front of that preposition and results prepositional phrase.""",
+                           "dalam, dengan, di, ke, oleh, pada, untuk")
 
 POS_TAGSET["JJ"] = TagInfo("JJ", """Adjective.
 Adjectives, i.e. words which describe, modify, or specify some properties of the head noun of the phrase, include:
@@ -144,15 +148,18 @@ award, or historical event, e.g. Piala Dunia, and
 j. the title of a work, television show, or movie, e.g. Lord of the Rings: The Return of the King.
 Proper noun which is written in foreign language is labeled NNP.
 Abbreviated proper noun is labeled NNP.
-If a proper noun consists of more than one words or parts, each word or part of that proper noun will be labeled NNP.""", "Boediono, Laut Jawa, Indonesia, India, Malaysia, Bank Mandiri, BBKP, Januari, Senin, Idul Fitri, Piala Dunia, Liga Primer, Lord of the Rings: The Return of the King")
+If a proper noun consists of more than one words or parts, each word or part of that proper noun will be labeled NNP.""",
+                            "Boediono, Laut Jawa, Indonesia, India, Malaysia, Bank Mandiri, BBKP, Januari, Senin, Idul Fitri, Piala Dunia, Liga Primer, Lord of the Rings: The Return of the King")
 
 POS_TAGSET["NND"] = TagInfo("NND", """Classifier, partitive, and measurement noun. Classifiers classify nouns into particular noun
 class, e.g. orang ‘man’.
 Partitives indicate particular amount of something based on the way it is measured, assembled, or processed, e.g. tetes ‘drop’.
-Measurement nouns refer to size, distance, volume, speed, weight, or temperature, e.g. ton ‘ton’.""", "orang, ton, helai, lembar")
+Measurement nouns refer to size, distance, volume, speed, weight, or temperature, e.g. ton ‘ton’.""",
+                            "orang, ton, helai, lembar")
 
 POS_TAGSET["PR"] = TagInfo("PR", """Demonstrative pronoun .
-Demonstrative pronouns imply “pointing to” or “demonstrating” the object they refer to, e.g. ini ‘this’.""", "ini, itu, sini, situ")
+Demonstrative pronouns imply “pointing to” or “demonstrating” the object they refer to, e.g. ini ‘this’.""",
+                           "ini, itu, sini, situ")
 
 POS_TAGSET["PRP"] = TagInfo("PRP", """Personal pronoun.
 Personal pronouns, i.e. pronouns which refer to people, include:
@@ -173,24 +180,30 @@ g. the third person plural pronoun, e.g. mereka
 POS_TAGSET["RB"] = TagInfo("RB", """Adverb.""", "sangat, hanya, justru, niscaya, segera")
 
 POS_TAGSET["RP"] = TagInfo("RP", """Particle.
-In this research, POS tag RP marks emphatic particle, i.e. particle which confirms interrogative, imperative, or declarative sentences.""", "pun, -lah, -kah")
+In this research, POS tag RP marks emphatic particle, i.e. particle which confirms interrogative, imperative, or declarative sentences.""",
+                           "pun, -lah, -kah")
 
 POS_TAGSET["SC"] = TagInfo("SC", """Subordinating conjunction, also called subordinator.
-Subordinating conjunction links two or more clauses and one of the clauses is a subordinate clause.""", "sejak, jika, seandainya, supaya, meski, seolah- olah, sebab, maka, tanpa, dengan, bahwa, yang, lebih ... daripada ..., semoga")
+Subordinating conjunction links two or more clauses and one of the clauses is a subordinate clause.""",
+                           "sejak, jika, seandainya, supaya, meski, seolah- olah, sebab, maka, tanpa, dengan, bahwa, yang, lebih ... daripada ..., semoga")
 
 POS_TAGSET["SYM"] = TagInfo("SYM", """Symbol.
-Symbols, which are labeled SYM, include mathematical symbols, e.g. +, and currency symbols, e.g. IDR.""", "IDR, +, %, @")
+Symbols, which are labeled SYM, include mathematical symbols, e.g. +, and currency symbols, e.g. IDR.""",
+                            "IDR, +, %, @")
 
 POS_TAGSET["UH"] = TagInfo("UH", """Interjection.
-Interjection expresses feeling or state of mind and has no relation with other words syntactically.""", "brengsek, oh, ooh, aduh, ayo, mari, hai")
+Interjection expresses feeling or state of mind and has no relation with other words syntactically.""",
+                           "brengsek, oh, ooh, aduh, ayo, mari, hai")
 
 POS_TAGSET["VB"] = TagInfo("VB", """Verbs.
 Verbs, which are labeled VB, include transitive verbs, intransitive verbs, active verbs, passive verbs, and copulas.
-If a verb consists of foreign word verb and Indonesian affixes, the resulted verb is labeled VB, e.g. di-arrange ‘arranged’.""", "merancang, mengatur, pergi, bekerja, tertidur")
+If a verb consists of foreign word verb and Indonesian affixes, the resulted verb is labeled VB, e.g. di-arrange ‘arranged’.""",
+                           "merancang, mengatur, pergi, bekerja, tertidur")
 
 POS_TAGSET["WH"] = TagInfo("WH", """Question.
 Question word distinguishes sentence as interrogative.
-A question, called indirect question, can be placed within a declarative sentence as subordinate clause. Thus, question word, which links indirect question and the main clause in a declarative sentence, becomes subordinating conjunction and is labeled SC.""", "siapa, apa, mana, kenapa, kapan, di mana, bagaimana, berapa")
+A question, called indirect question, can be placed within a declarative sentence as subordinate clause. Thus, question word, which links indirect question and the main clause in a declarative sentence, becomes subordinating conjunction and is labeled SC.""",
+                           "siapa, apa, mana, kenapa, kapan, di mana, bagaimana, berapa")
 
 POS_TAGSET["X"] = TagInfo("X", """Unknown.
 A word or part of a sentence which its category is unknown or uncertain is labeled X.
@@ -198,17 +211,19 @@ Typo is also labeled X.""", "statemen")
 
 POS_TAGSET["Z"] = TagInfo("Z", """Punctuation.""", '"...", ?, .')
 
-#----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
 # DATA STRUCTURES
-#----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 class Document:
     ''' A document contains many sentences
     '''
-    def __init__(self, sentences = None):
-        self.words     = []
-        self.lexicon   = defaultdict(set)
-        self.pos       = defaultdict(set)
+
+    def __init__(self, sentences=None):
+        self.words = []
+        self.lexicon = defaultdict(set)
+        self.pos = defaultdict(set)
 
         if sentences is None:
             self.sentences = []
@@ -218,7 +233,6 @@ class Document:
             for sent in sentences:
                 for word in sent:
                     self.add_word(word)
-
 
     def __len__(self):
         return len(self.sentences)
@@ -261,26 +275,26 @@ class Document:
     def text(self):
         ''' Return a text-only version of this doc
         '''
-        return '\n'.join([ x.text() for x in self ])
+        return '\n'.join([x.text() for x in self])
 
     def find(self, text, case_sensitive=True):
         words = self.find_word(text, case_sensitive)
-        sents = set([ x.sentence for x in words ])
+        sents = set([x.sentence for x in words])
         subdoc = Document(list(sents))
         return subdoc
 
     def filter(self, pattern_text):
         pattern = re.compile(pattern_text)
-        
 
     def find_word(self, text, case_sensitive=True):
         ''' Find a word by regular expression
         '''
         pattern = re.compile(text)
         if case_sensitive:
-            return [ w for w in self.words if pattern.match(w.text) ]
+            return [w for w in self.words if pattern.match(w.text)]
         else:
-            return [ w for w in self.words if pattern.match(w.text.lower()) ]
+            return [w for w in self.words if pattern.match(w.text.lower())]
+
 
 class Sentence:
     ''' Sentence structure
@@ -289,10 +303,10 @@ class Sentence:
 
     def __init__(self, doc=None):
         self.words = []
-        self.doc   = doc
+        self.doc = doc
 
     def __str__(self):
-        return " ".join([ str(x) for x in self.words ])
+        return " ".join([str(x) for x in self.words])
 
     def __repr__(self):
         return str(self)
@@ -315,14 +329,14 @@ class Sentence:
         if self.doc:
             self.doc.add_word(w)
         return w
-    
+
     def text(self):
         ''' Return text-only version of this sentence
         E.g.:
             str(a_sentence) will provide 'Kera/NN untuk/SC amankan/VB pesta olahraga/NN'
             but a_sentence.text() will provide 'Kera untuk amankan pesta olahraga'
         '''
-        return " ".join([ x.text for x in self.words ])
+        return " ".join([x.text for x in self.words])
 
     def pos(self):
         ''' Return sentence structure (a sequence of POS as a string)
@@ -331,7 +345,8 @@ class Sentence:
         is 
         'NN SC VB NN'
         '''
-        return ' '.join([ x.pos for x in self.words ])
+        return ' '.join([x.pos for x in self.words])
+
 
 class Word:
     ''' Information of a Word
@@ -339,7 +354,7 @@ class Word:
 
     def __init__(self, text, pos, sentence=None):
         self.text = text
-        self.pos  = pos
+        self.pos = pos
         self.sentence = sentence
 
     def __str__(self):
@@ -360,9 +375,10 @@ class Word:
     def __lt__(self, other):
         return (self.text, self.pos) < (other.text, other.pos)
 
-#----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
 # FUNCTIONS
-#----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 
 def parse_data(datafile_path):
     doc = Document()
@@ -371,10 +387,10 @@ def parse_data(datafile_path):
         content = datafile.read()
 
         # Split into sentences
-        sentences_raw = content.split('\n\n') # Sentences are separated by an empty line (\n\n)
+        sentences_raw = content.split('\n\n')  # Sentences are separated by an empty line (\n\n)
         for sentence_raw in sentences_raw:
             words_raw = sentence_raw.split('\n')
-            sentence  = doc.new_sentence()
+            sentence = doc.new_sentence()
             for word_raw in words_raw:
                 if '\t' not in word_raw:
                     continue
@@ -383,10 +399,12 @@ def parse_data(datafile_path):
 
     return doc
 
+
 ########################################################################
 
 def itc(file_name=ITC_DATA_FILE):
     return parse_data(file_name)
+
 
 def export_itc():
     print("Reading ITC ...")
@@ -398,10 +416,12 @@ def export_itc():
         for sent in doc:
             itc_output.write('%s\n' % (sent,))
     print("ITC has been exported to %s" % (output_loc,))
+
+
 def dev_mode():
     print("Find negative words")
     doc = all_ict()
-    neg_words = [ 'tidak', 'tak', 'non', 'bukan', 'jangan', 'belum' ]
+    neg_words = ['tidak', 'tak', 'non', 'bukan', 'jangan', 'belum']
     word_list = set()
     for sent in doc.sentences:
         for word in sent.words:
@@ -409,40 +429,42 @@ def dev_mode():
                 word_list.add(str(word).lower())
     print(word_list)
 
+
 ########################################################################
 
 def main():
-        '''Main entry of ITCtk.
-        '''
+    '''Main entry of ITCtk.
+    '''
 
-        # It's easier to create a user-friendly console application by using argparse
-        # See reference at the top of this script
-        parser = argparse.ArgumentParser(description="Python toolkit for manipulating Indonesian Tagged Corpus")
-        
-        # Positional argument(s)
-        parser.add_argument('-d', '--dev_mode', help='Quick dev method', action='store_true')
-        parser.add_argument('-x', '--export', help='Export ITC to NTLK format', action='store_true')
+    # It's easier to create a user-friendly console application by using argparse
+    # See reference at the top of this script
+    parser = argparse.ArgumentParser(description="Python toolkit for manipulating Indonesian Tagged Corpus")
 
-        # Optional argument(s)
-        group = parser.add_mutually_exclusive_group()
-        group.add_argument("-v", "--verbose", action="store_true")
-        group.add_argument("-q", "--quiet", action="store_true")
+    # Positional argument(s)
+    parser.add_argument('-d', '--dev_mode', help='Quick dev method', action='store_true')
+    parser.add_argument('-x', '--export', help='Export ITC to NTLK format', action='store_true')
 
-        # Main script
-        if len(sys.argv) == 1:
-                # User didn't pass any value in, show help
-                parser.print_help()
+    # Optional argument(s)
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("-v", "--verbose", action="store_true")
+    group.add_argument("-q", "--quiet", action="store_true")
+
+    # Main script
+    if len(sys.argv) == 1:
+        # User didn't pass any value in, show help
+        parser.print_help()
+    else:
+        # Parse input arguments
+        args = parser.parse_args()
+        # Now do something ...
+        if args.dev_mode:
+            dev_mode()
+        if args.export:
+            export_itc()
         else:
-                # Parse input arguments
-                args = parser.parse_args()
-                # Now do something ...
-                if args.dev_mode:
-                        dev_mode()
-                if args.export:
-                    export_itc()
-                else:
-                        parser.print_help()
-        pass
+            parser.print_help()
+    pass
+
 
 if __name__ == "__main__":
-        main()
+    main()
