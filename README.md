@@ -47,6 +47,30 @@ Look for interesting constructions:
 ```
 lookup("NEG PRP VB")
 ```
+regular expressions can be used,
+e.g. look for constructions with 12 NNP
+and show the results line by line
+```
+dump(lookup("(NNP ){12}"))
+```
+e.g. look for constructions which has any POS
+preceded by NEG and followed by VB such as
+NEG PRP VB, NEG JJ VB etc.
+```
+lookup("NEG\s\w+\sVB")
+```
+
+Look for parts-of-speech constructions in a sentence:
+---
+```
+a_sentence.pos()
+```
+
+Print a sentence as a text without part-of-speech information:
+---
+```
+a_sentence.text()
+```
 
 Look for a dictionary of unique words and part(s)-of-speech:
 ---
@@ -81,6 +105,28 @@ Look for a list of words:
 ---
 ```
 doc.word_list()
+```
+
+Look for words in sentences with regular expression:
+---
+e.g. look for words "penge...kan" such as "pengecekan"
+```
+doc.find("^penge.+kan$")
+```
+to show sentence by sentence
+```
+dump(doc.find("^penge.+kan$"))
+```
+
+Look for words without sentences with regular expression:
+---
+e.g. look for words "penge...kan" such as "pengecekan"
+```
+doc.find_word("^penge.+kan$")
+```
+to show line by line
+```
+dump(doc.find_word("^penge.+kan$"))
 ```
 
 Print the whole text:
