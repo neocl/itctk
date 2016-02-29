@@ -6,12 +6,12 @@ Python toolkit for manipulating Indonesian Tagged Corpus
 Latest version can be found at https://github.com/neocl/itctk
 
 References:
-        Python documentation:
-                https://docs.python.org/
-        argparse module:
-                https://docs.python.org/3/howto/argparse.html
-        PEP 257 - Python Docstring Conventions:
-                https://www.python.org/dev/peps/pep-0257/
+    Python documentation:
+        https://docs.python.org/
+    argparse module:
+        https://docs.python.org/3/howto/argparse.html
+    PEP 257 - Python Docstring Conventions:
+        https://www.python.org/dev/peps/pep-0257/
 
 @author: Le Tuan Anh <tuananh.ke@gmail.com>
 '''
@@ -66,7 +66,7 @@ def pro_lookup(cond):
 
 def lookup(pattern_text):
     pattern = re.compile(pattern_text)
-    return pro_lookup(lambda x: pattern.match(x.pos()))
+    return pro_lookup(lambda x: pattern.search(x.pos()))
 
 def stats(doc):
     print("Sentence count: {:>12,}".format(len(doc)))
@@ -74,6 +74,7 @@ def stats(doc):
     print("Lexicon size  : {:>12,}".format(len(doc.word_list())))
     print("POS tagset    : {}".format(doc.pos_list()))
     print()
+
 ########################################################################
 # Load ITC into doc by default
 ########################################################################
@@ -86,6 +87,8 @@ def main():
     doc = itc()
     print("ITC document is now ready to be used in var `doc`")
     stats(doc)
+
+    lookup('NEG PRP')
 
 if __name__ == '__main__':
     main()

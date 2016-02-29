@@ -6,15 +6,15 @@ Script for testing ITCtk library
 Latest version can be found at https://github.com/neocl/itctk
 
 References:
-        Python documentation:
-                https://docs.python.org/
-        Python unittest
-                https://docs.python.org/3/library/unittest.html
-        --
-        argparse module:
-                https://docs.python.org/3/howto/argparse.html
-        PEP 257 - Python Docstring Conventions:
-                https://www.python.org/dev/peps/pep-0257/
+    Python documentation:
+        https://docs.python.org/
+    Python unittest
+        https://docs.python.org/3/library/unittest.html
+    --
+    argparse module:
+        https://docs.python.org/3/howto/argparse.html
+    PEP 257 - Python Docstring Conventions:
+        https://www.python.org/dev/peps/pep-0257/
 
 @author: Le Tuan Anh <tuananh.ke@gmail.com>
 '''
@@ -62,69 +62,70 @@ from itctk import ITC_DATA_FILE, parse_data   # Expose low level functions
 
 class TestICTTK(unittest.TestCase):
 
-        def test_read_doc(self):
-                print("Testing read all ITC content")
-                doc = itc('data/test.tsv')
-                self.assertIsNotNone(doc)
-                # self.assertEqual(len(doc.sentences), 10030) # real data
-                self.assertEqual(len(doc.sentences), 24)      # test data
-
+    def test_read_doc(self):
+        print("Testing read all ITC content")
+        doc = itc('data/test.tsv')
+        self.assertIsNotNone(doc)
+        # self.assertEqual(len(doc.sentences), 10030) # real data
+        self.assertEqual(len(doc.sentences), 24)      # test data
+        
 class TestWord(unittest.TestCase):
-        def test_word_comparison(self):
-                w = Word('test', 'NN')
-                w2 = Word('test', 'NN')
-                self.assertTrue(w == w2)
 
-        def test_word_sorting(self):
-                w1 = Word(None, None)
-                w2 = Word(None, None)
-                w3 = Word('test', 'NN')
-                w4 = Word('test', 'VB')
+    def test_word_comparison(self):
+        w = Word('test', 'NN')
+        w2 = Word('test', 'NN')
+        self.assertTrue(w == w2)
+
+    def test_word_sorting(self):
+        w1 = Word(None, None)
+        w2 = Word(None, None)
+        w3 = Word('test', 'NN')
+        w4 = Word('test', 'VB')
+        
+        self.assertTrue(w1 == w2)
+        self.assertTrue(w4 > w3)
+        self.assertTrue(w3 > w2)
+
+        print("Test list sorting ...")
+        l = [w4, w3, w2, w1]
+        sorted_l = list(sorted(l))
+        expected = [w1, w2, w3, w4]
+        self.assertEqual(expected, sorted_l)
                 
-                self.assertTrue(w1 == w2)
-                self.assertTrue(w4 > w3)
-                self.assertTrue(w3 > w2)
 
-                print("Test list sorting ...")
-                l = [w4, w3, w2, w1]
-                sorted_l = list(sorted(l))
-                expected = [w1, w2, w3, w4]
-                self.assertEqual(expected, sorted_l)
-                
+    def test_word_in_set(self):
+        set1 = set()
+        set2 = set()
+        w1 = Word(None, None)
+        w2 = Word(None, None)
+        w3 = Word('test', 'NN')
+        w4 = Word('test', 'VB')
 
-        def test_word_in_set(self):
-                set1 = set()
-                set2 = set()
-                w1 = Word(None, None)
-                w2 = Word(None, None)
-                w3 = Word('test', 'NN')
-                w4 = Word('test', 'VB')
+        set1.add(w1)
+        set1.add(w2)
+        set1.add(w3)
+        
+        # w1 and w2 are the same
+        self.assertEqual(2, len(set1))
 
-                set1.add(w1)
-                set1.add(w2)
-                set1.add(w3)
-                
-                # w1 and w2 are the same
-                self.assertEqual(2, len(set1))
+        set2.add(w1)
+        set2.add(w2)
+        set2.add(w3)
+        set2.add(w4)
 
-                set2.add(w1)
-                set2.add(w2)
-                set2.add(w3)
-                set2.add(w4)
+        self.assertEqual(3,len(set2))
 
-                self.assertEqual(3,len(set2))
-
-        def test_word_search(self):
-		'''Test searching by regular expression'''
-                doc = itc('data/test.tsv')
-		found = doc.find_word('mem.+')
-		self.assertTrue(len(found) > 0)
-		self.assertEqual(7, len(found))
+    def test_word_search(self):
+        '''Test searching by regular expression'''
+        doc = itc('data/test.tsv')
+        found = doc.find_word('mem.+')
+        self.assertTrue(len(found) > 0)
+        self.assertEqual(7, len(found))
 
 ########################################################################
 
 def main():
-        unittest.main()
+    unittest.main()
 
 if __name__ == "__main__":
-        main()
+    main()

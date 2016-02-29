@@ -6,12 +6,12 @@ Python toolkit for manipulating Indonesian Tagged Corpus
 Latest version can be found at https://github.com/neocl/itctk
 
 References:
-        Python documentation:
-                https://docs.python.org/
-        argparse module:
-                https://docs.python.org/3/howto/argparse.html
-        PEP 257 - Python Docstring Conventions:
-                https://www.python.org/dev/peps/pep-0257/
+    Python documentation:
+        https://docs.python.org/
+    argparse module:
+        https://docs.python.org/3/howto/argparse.html
+    PEP 257 - Python Docstring Conventions:
+        https://www.python.org/dev/peps/pep-0257/
 
 @author: Le Tuan Anh <tuananh.ke@gmail.com>
 '''
