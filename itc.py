@@ -90,12 +90,35 @@ def stats(doc):
 
 doc = None # ITC will be loaded into this variable
 
+def show_help():
+    usage = [("Command", "Description")
+             ,("doc", "`doc` is a special variable to access itc corpus")
+             ,('sents = lookup(\'kita/prp \w+/vb\')', 'Look for sentences with kita as PRP that follows by any verb')
+             ,("doc.pos_list()", "Get all POS that are used in this corpus")
+             ,("doc.find('kita')", "Find all sentences with the word `kita`")
+             ,("help(doc)", "Show everything about Document class")
+             ,("help(lookup)", "How to use the lookup function")
+             ,("POS_TAGSET['CC']", "Show information about the tag `CC`")
+    ]
+    max_lengths = [0,0]
+    for row in usage:
+        for idx,cell in enumerate(row):
+            if max_lengths[idx] < len(cell):
+                max_lengths[idx] = len(cell)
+
+    for row in usage:
+        print(' '.join([ text.ljust(size) for size,text in zip(max_lengths, row)]))
+    print("Try help(doc), help(Sentence), help(Word), help(lookup), etc. for more information")
+
 def main():
     print("Reading Indonesian Tagged Corpus ...")
     global doc
     doc = itc()
     print("ITC document is now ready to be used in var `doc`")
     stats(doc)
+    print('--')
+    show_help()
+    print('')
 
 if __name__ == '__main__':
     main()
