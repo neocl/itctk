@@ -43,8 +43,8 @@ for sent in doc:        # for each sentence in doc
 ```
 
 Look for interesting constructions with `lookup()`.
-When you call `lookup()` the result is auto dumped. Use a variable instead, such as `ss`.
 ---
+When you call `lookup()` the result is auto dumped. Use a variable instead, such as `ss`.
 ```
 ss = lookup("NEG PRP VB")
 ```
