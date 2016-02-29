@@ -37,6 +37,7 @@ References:
 #THE SOFTWARE.
 
 __author__ = "Le Tuan Anh <tuananh.ke@gmail.com>"
+__contributors__ = ["David Moeljadi <davidmoeljadi@gmail.com>"]
 __copyright__ = "Copyright 2016, itctk"
 __credits__ = [ "Le Tuan Anh" ]
 __license__ = "MIT"
@@ -64,9 +65,17 @@ def pro_lookup(cond):
     dump(sents)
     return Document(sents)
 
-def lookup(pattern_text):
+# [ 2016-02-29 DM ] added a better lookup method
+def lookup_c(pattern_text):
     pattern = re.compile(pattern_text)
     return pro_lookup(lambda x: pattern.search(x.pos()))
+
+def lookup(pattern_text):
+    '''to search words with parts-of-speech
+    e.g. lookup("aku/prp \w+/vb") to search for "aku makan", "aku minum" etc.
+    Do not use upper case in lookup() because sentences are in lower case.'''
+    pattern = re.compile(pattern_text)
+    return pro_lookup(lambda x: pattern.search(str(x).lower()))
 
 def stats(doc):
     print("Sentence count: {:>12,}".format(len(doc)))
