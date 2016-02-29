@@ -44,21 +44,32 @@ for sent in doc:        # for each sentence in doc
 
 Look for interesting constructions with `lookup()`.
 ---
-When you call `lookup()` the result is auto dumped. Use a variable instead, such as `ss`.
+look for words with parts-of-speech.
+Do not use upper case in `lookup()` because sentences are in lower case.
+When you call `lookup_c()` the result is auto dumped. Use a variable instead, such as `ss`.
+e.g.  to search for "aku makan", "aku minum" etc.
+and show the results line by line
 ```
-ss = lookup("NEG PRP VB")
+ss = lookup("aku/prp \w+/vb")
+```
+
+Look for interesting constructions with `lookup_c()`.
+---
+When you call `lookup_c()` the result is auto dumped. Use a variable instead, such as `ss`.
+```
+ss = lookup_c("NEG PRP VB")
 ```
 regular expressions can be used,
 e.g. look for constructions with 12 NNP
 and show the results line by line
 ```
-ss = lookup("(NNP ){12}"))
+ss = lookup_c("(NNP ){12}"))
 ```
 e.g. look for constructions which has any POS
 preceded by NEG and followed by VB such as
 NEG PRP VB, NEG JJ VB etc.
 ```
-ss = lookup("NEG\s\w+\sVB")
+ss = lookup_c("NEG \w+ VB")
 ```
 
 Look for parts-of-speech constructions in a sentence:
