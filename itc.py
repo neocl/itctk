@@ -88,7 +88,5 @@ def main():
     print("ITC document is now ready to be used in var `doc`")
     stats(doc)
 
-    lookup('NEG PRP')
-
 if __name__ == '__main__':
     main()
