@@ -42,22 +42,23 @@ for sent in doc:        # for each sentence in doc
     print(word)
 ```
 
-Look for interesting constructions:
+Look for interesting constructions with `lookup()`.
 ---
+When you call `lookup()` the result is auto dumped. Use a variable instead, such as `ss`.
 ```
-lookup("NEG PRP VB")
+ss = lookup("NEG PRP VB")
 ```
 regular expressions can be used,
 e.g. look for constructions with 12 NNP
 and show the results line by line
 ```
-dump(lookup("(NNP ){12}"))
+ss = lookup("(NNP ){12}"))
 ```
 e.g. look for constructions which has any POS
 preceded by NEG and followed by VB such as
 NEG PRP VB, NEG JJ VB etc.
 ```
-lookup("NEG\s\w+\sVB")
+ss = lookup("NEG\s\w+\sVB")
 ```
 
 Look for parts-of-speech constructions in a sentence:
