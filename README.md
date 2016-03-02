@@ -72,6 +72,18 @@ NEG PRP VB, NEG JJ VB etc.
 ss = lookup_c("NEG \w+ VB")
 ```
 
+Look for occurrence of words with specific parts-of-speech
+---
+e.g. look for adverbs and adjectives, the adverbs precede the adjectives
+```
+parts = set()
+for sent in ss:
+...     part=re.search("\w+/RB \w+/JJ", str(sent))
+...     if part:
+...             parts.add(part.group(0))
+dump(parts)
+```
+
 Look for parts-of-speech constructions in a sentence:
 ---
 ```
