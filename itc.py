@@ -48,9 +48,12 @@ __status__ = "Prototype"
 
 ########################################################################
 
+import os
 from itctk import *
 import re
 from collections import defaultdict as dd
+
+from barasa.barasa import gen_barasa, read_barasa, BARASA_FILE
 
 ########################################################################
 # Some useful methods
@@ -61,8 +64,9 @@ def dump(a_list):
         print("%s. %s" % (idx + 1, item))
 
 def pro_lookup(cond):
+    global auto_dump
     sents = [ x for x in doc if cond(x) ]
-    dump(sents)
+    if auto_dump: dump(sents)
     return Document(sents)
 
 # [ 2016-02-29 DM ] added a better lookup method
@@ -89,9 +93,12 @@ def stats(doc):
 ########################################################################
 
 doc = None # ITC will be loaded into this variable
+brs = None # Barasa will be loaded into this variable
+auto_dump = True
 
 def show_help():
     usage = [("Command", "Description")
+             ,("brs", "`brs` is a special variable to access Barasa SentiWordNet")
              ,("doc", "`doc` is a special variable to access itc corpus")
              ,('sents = lookup(\'kita/prp \w+/vb\')', 'Look for sentences with kita as PRP that follows by any verb')
              ,("doc.pos_list()", "Get all POS that are used in this corpus")
@@ -99,6 +106,7 @@ def show_help():
              ,("help(doc)", "Show everything about Document class")
              ,("help(lookup)", "How to use the lookup function")
              ,("POS_TAGSET['CC']", "Show information about the tag `CC`")
+             ,("brs['kebaikan']", "Show all scores for the word `kebaikan`")
     ]
     max_lengths = [0,0]
     for row in usage:
@@ -111,8 +119,18 @@ def show_help():
     print("Try help(doc), help(Sentence), help(Word), help(lookup), etc. for more information")
 
 def main():
-    print("Reading Indonesian Tagged Corpus ...")
     global doc
+    global brs
+
+    print("Reading Barasa (Bahasa SentiWordNet) ...")
+    if not os.path.isfile(BARASA_FILE):
+        print("Barasa does not exist, attempting to create Barasa data ...")
+        gen_barasa()
+    brs = read_barasa()
+    if(brs):
+        print("Barasa has been read")
+        print("Lemma count: %s" % (len(brs),))
+    print("Reading Indonesian Tagged Corpus ...")
     doc = itc()
     print("ITC document is now ready to be used in var `doc`")
     stats(doc)

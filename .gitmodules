@@ -1,3 +1,6 @@
 [submodule "data/itcdata"]
 	path = data/itcdata
 	url = https://github.com/neocl/idn-tagged-corpus
+[submodule "modules/barasa"]
+	path = modules/barasa
+	url = https://github.com/neocl/barasa
