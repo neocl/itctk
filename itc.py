@@ -52,7 +52,6 @@ import os
 from itctk import *
 import re
 from collections import defaultdict as dd
-
 from barasa.barasa import gen_barasa, read_barasa, BARASA_FILE
 
 ########################################################################
@@ -122,18 +121,27 @@ def main():
     global doc
     global brs
 
-    print("Reading Barasa (Bahasa SentiWordNet) ...")
+    # Try to generate Barasa before trying to read it ...
     if not os.path.isfile(BARASA_FILE):
         print("\t -> Barasa does not exist, attempting to create Barasa data ...")
         try:
             gen_barasa()
-            brs = read_barasa()
         except:
             print("\t\t -> Failed to generate Barasa. Please make sure that you ran >>>> ./config.sh <<<< in the terminal first")
 
-    if(brs):
-        print("Barasa has been read")
-        print("Lemma count: %s" % (len(brs),))
+    # print("Reading Barasa (Bahasa SentiWordNet) ...")
+    try:
+        brs = read_barasa()
+        # Display some stats
+        if(brs):
+            print("Barasa has been read")
+            print("Lemma count: %s" % (len(brs),))
+        else:
+            print("Barasa couldn't be read")
+    except Exception as e:
+        print("Error: %s" % (e,))
+
+
     print("Reading Indonesian Tagged Corpus ...")
     doc = itc()
     print("ITC document is now ready to be used in var `doc`")
