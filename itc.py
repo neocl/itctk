@@ -124,9 +124,13 @@ def main():
 
     print("Reading Barasa (Bahasa SentiWordNet) ...")
     if not os.path.isfile(BARASA_FILE):
-        print("Barasa does not exist, attempting to create Barasa data ...")
-        gen_barasa()
-    brs = read_barasa()
+        print("\t -> Barasa does not exist, attempting to create Barasa data ...")
+        try:
+            gen_barasa()
+            brs = read_barasa()
+        except:
+            print("\t\t -> Failed to generate Barasa. Please make sure that you ran >>>> ./config.sh <<<< in the terminal first")
+
     if(brs):
         print("Barasa has been read")
         print("Lemma count: %s" % (len(brs),))
