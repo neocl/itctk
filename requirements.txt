@@ -1,1 +1,2 @@
-
+Barasa project: Indonesian SentiWordNet
+       https://github.com/neocl/barasa

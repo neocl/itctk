@@ -178,3 +178,5 @@ Project structure:
 |   |-- ....
 |- setup.py
 ```
+
+Project maintainers: Le Tuan Anh <tuananh.ke@gmail.com>, David Moeljadi <davidmoeljadi@gmail.com>
